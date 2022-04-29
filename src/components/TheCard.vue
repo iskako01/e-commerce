@@ -28,4 +28,13 @@
 export default {};
 </script>
 
-<style></style>
+<style scoped>
+.my-card {
+  width: 100%;
+  max-width: 350px;
+}
+img {
+  width: 100%;
+  object-fit: cover;
+}
+</style>

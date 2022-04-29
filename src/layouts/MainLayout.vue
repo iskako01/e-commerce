@@ -2,7 +2,7 @@
   <q-layout
     view="lHh lpr lFf"
     container
-    style="height: 500px"
+    style="height: 100vh"
     class="shadow-2 rounded-borders wrapper"
   >
     <q-page-container>
