@@ -23,7 +23,7 @@
         <span
           >Sale:<span class="sale"> {{ sale }}KČ</span>
         </span>
-        <q-btn color="black" @click="addCart" label="Buy it now" />
+        <q-btn color="black" @click="addToCart" label="Buy it now" />
       </div>
     </q-card-section>
   </q-card>
@@ -31,6 +31,7 @@
 
 <script>
 import { computed } from "@vue/runtime-core";
+import { useStore } from "vuex";
 export default {
   props: {
     card: {
@@ -40,13 +41,19 @@ export default {
   },
   emits: ["add-cart"],
   setup(props, { emit }) {
+    const store = useStore();
+
     const sale = computed(() => props.card.price - props.card.price * 0.15);
 
-    const addCart = () => {
-      emit("add-cart", { currentProduct: props.card, sale: sale.value });
+    const productTotal = computed(() => {
+      return store.getters.productQuantity(props.card);
+    });
+
+    const addToCart = () => {
+      store.commit("addToCart", props.card);
     };
 
-    return { sale, addCart };
+    return { sale, addToCart };
   },
 };
 </script>

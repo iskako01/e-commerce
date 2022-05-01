@@ -14,7 +14,7 @@
         <div class="vertical__column">
           <TheCard
             :card="card"
-            @add-cart="addCart"
+          
             v-for="card in cards"
             :key="card.id"
           />
@@ -43,20 +43,22 @@ export default {
     const cart = ref([]);
 
     const cards = store.state.cards.cards;
+    const count = computed(() => cart.value.length);
 
-    const addCart = (currentProduct) => {
-      cart.value.push(currentProduct);
+    // const addCart = () => {
+    // //   let id = currentProduct.id;
+    // //   cart.value.push(currentProduct);
 
-      console.log(cart.value);
-    };
+    //   console.log("cart", cart.value);
+    //   console.log("card", cards);
+    // };
 
     const openCart = () => {
-      store.dispatch("dataCart", cart.value);
+    //   store.dispatch("dataCart", cart.value);
 
       router.push({ name: "shopping_cart" });
     };
 
-    const count = computed(() => cart.value.length);
     // onMounted(async () => {
     //   await fetch("https://zadani.zkus.it/api/products", {
     //     method: "GET",
@@ -73,7 +75,7 @@ export default {
     //     });
     // });
 
-    return { cards, count, addCart, openCart };
+    return { cards, count, openCart };
   },
 };
 </script>

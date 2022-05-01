@@ -15,30 +15,34 @@
           <td>
             <div class="product__info">
               <div class="product__img">
-                <img :src="product.currentProduct.imageUrl" alt="" />
+                <img :src="product.imageUrl" alt="" />
               </div>
               <div class="product__name">
                 <div class="name">
-                  {{ product.currentProduct.title }}
+                  {{ product.title }}
                   <div class="type">Lego</div>
                 </div>
 
-                <button class="product__btn">Remove</button>
+                <button class="product__btn" @click="removeFromCart(product)">
+                  Remove
+                </button>
               </div>
             </div>
           </td>
           <td>
             <div class="quantity">
-              <button class="quantity__btn" @click="plus">+</button>
-              <div class="count">{{ count }}</div>
-              <button class="quantity__btn" @click="minus">-</button>
+              <button class="quantity__btn" @click="plus(product)">+</button>
+              <div class="count">{{ product.quantity }}</div>
+              <button class="quantity__btn" @click="minus(product)">-</button>
             </div>
           </td>
           <td>
-            <div class="price-vat">{{ product.currentProduct.price }} KČ</div>
+            <div class="price-vat">
+              {{ product.price - product.price * 0.15 }} KČ
+            </div>
           </td>
           <td>
-            <div class="price">{{ product.sale }} KČ</div>
+            <div class="price">{{ product.price }} KČ</div>
           </td>
         </tr>
       </tbody>
@@ -53,9 +57,9 @@
       <tbody>
         <tr>
           <td></td>
-          <td>123</td>
-          <td>456</td>
-          <td>567</td>
+          <td>{{ totalQuantity }}</td>
+          <td>{{ totalPriceVat }} KČ</td>
+          <td>{{ totalPrice }} KČ</td>
         </tr>
       </tbody>
     </table>
@@ -64,7 +68,7 @@
 
 <script>
 // import TheProduct from "../components/TheProduct.vue";
-import { ref } from "vue";
+import { ref, computed } from "vue";
 import { useRouter } from "vue-router";
 import { useStore } from "vuex";
 
@@ -72,19 +76,44 @@ export default {
   name: "TheProducts",
   components: {},
   setup() {
-    const router = useRouter();
     const store = useStore();
+    const cart = computed(() => store.state.cart.cart);
 
-    let count = ref(1);
-    const minus = () => {
-      count.value--;
+    const priceVat = computed(() => {
+      return store.getters.priceVat(cart.value);
+    });
+    const totalPriceVat = computed(() => {
+      return store.getters.totalPriceVat(cart.value);
+    });
+    const totalQuantity = computed(() => {
+      return store.getters.totalQuantity(cart.value);
+    });
+    const totalPrice = computed(() => {
+      return store.getters.totalPrice(cart.value);
+    });
+
+    const plus = (product) => {
+      store.commit("addToCart", product);
     };
-    const plus = () => {
-      count.value++;
+    const minus = (product) => {
+      store.commit("removeFromCart", product);
+    };
+    const removeFromCart = (product) => {
+      store.commit("removeFromCart", product);
+
+      console.log(cart);
     };
 
-    const cart = store.state.cart.cart;
-    return { cart, minus, plus, count };
+    return {
+      cart,
+      minus,
+      plus,
+      removeFromCart,
+      totalQuantity,
+      totalPrice,
+      priceVat,
+      totalPriceVat,
+    };
   },
 };
 </script>
