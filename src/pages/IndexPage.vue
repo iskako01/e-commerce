@@ -1,7 +1,7 @@
 <template>
   <q-page class="flex flex-center">
     <div class="cart" @click="openCart">
-      <span class="cart__name">{{ count }}</span>
+      <span class="cart__name">{{ totalQuantity }}</span>
     </div>
     <div class="container">
       <TheContent />
@@ -12,12 +12,7 @@
 
       <div class="vertical__row">
         <div class="vertical__column">
-          <TheCard
-            :card="card"
-          
-            v-for="card in cards"
-            :key="card.id"
-          />
+          <TheCard :card="card" v-for="card in cards" :key="card.id" />
         </div>
       </div>
     </div>
@@ -40,10 +35,13 @@ export default {
     const store = useStore();
     const router = useRouter();
 
-    const cart = ref([]);
+    const cart = computed(() => store.state.cart.cart);
 
     const cards = store.state.cards.cards;
-    const count = computed(() => cart.value.length);
+
+    const totalQuantity = computed(() => {
+      return store.getters.totalQuantity(cart.value);
+    });
 
     // const addCart = () => {
     // //   let id = currentProduct.id;
@@ -54,28 +52,28 @@ export default {
     // };
 
     const openCart = () => {
-    //   store.dispatch("dataCart", cart.value);
+      //   store.dispatch("dataCart", cart.value);
 
       router.push({ name: "shopping_cart" });
     };
 
-    // onMounted(async () => {
-    //   await fetch("https://zadani.zkus.it/api/products", {
-    //     method: "GET",
-    //     headers: {
-    //       "X-Api-Key": "3a95z2n8",
-    //       "Content-Type": "application/json",
-    //     },
-    //   })
-    //     .then((response) => {
-    //       return response.json();
-    //     })
-    //     .then((data) => {
-    //       console.log(data);
-    //     });
-    // });
+    onMounted(async () => {
+      //   await fetch("https://zadani.zkus.it/api/products", {
+      //     method: "GET",
+      //     headers: {
+      //       "X-Api-Key": "3a95z2n8",
+      //       "Content-Type": "application/json",
+      //     },
+      //   })
+      //     .then((response) => {
+      //       return response.json();
+      //     })
+      //     .then((data) => {
+      //       console.log(data);
+      //     });
+    });
 
-    return { cards, count, openCart };
+    return { cards, openCart, totalQuantity };
   },
 };
 </script>

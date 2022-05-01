@@ -1,6 +1,10 @@
 // import axios from "../../axios/request";
 // import store from "../index";
 
+const updateLocalStorage = (cart) => {
+  localStorage.setItem("cart", JSON.stringify(cart));
+};
+
 export default {
   namespaced: false,
   state() {
@@ -18,6 +22,8 @@ export default {
         state.cart.push({ ...product, quantity: 1 });
         console.log(state.cart);
       }
+
+      updateLocalStorage(state.cart);
     },
     removeFromCart(state, product) {
       const item = state.cart.find((i) => i.id === product.id);
@@ -30,6 +36,13 @@ export default {
           state.cart = state.cart.filter((i) => i.id !== product.id);
           console.log(state.cart);
         }
+      }
+      updateLocalStorage(state.cart);
+    },
+    updateCartFromLocalStorage(state) {
+      const cart = localStorage.getItem("cart");
+      if (cart) {
+        state.cart = JSON.parse(cart);
       }
     },
   },

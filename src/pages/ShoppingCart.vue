@@ -14,20 +14,15 @@
       </q-step>
 
       <q-step color="grey" :name="2" prefix="2" title="" :done="step > 2">
-        <TheForm />
+        <TheForm @on-submit="btnNext" />
       </q-step>
 
       <template v-slot:navigation>
         <q-stepper-navigation>
-          <q-btn
-            color="black"
-            @click="btnPrevious"
-            label="Back"
-            class="q-ml-sm"
-          ></q-btn>
+          <q-btn @click="btnPrevious" label="go Back" class="q-ml-sm"></q-btn>
           <q-btn
             @click="btnNext"
-            :label="step === 2 ? 'Finish' : 'Continue'"
+            :label="step === 2 ? 'confirm' : 'checkout'"
           ></q-btn>
         </q-stepper-navigation>
       </template>
@@ -54,8 +49,13 @@ export default {
 
     const cart = store.state.cart.cart;
 
-    const btnNext = () => {
-      stepper.value.next();
+    const btnNext = (userData) => {
+      if (step.value === 1) {
+        stepper.value.next();
+        console.log(step.value);
+      } else {
+        console.log(userData);
+      }
     };
     const btnPrevious = () => {
       if (step.value === 1) {
@@ -64,11 +64,16 @@ export default {
       stepper.value.previous();
     };
 
+    const onSubmit = (userData) => {
+      console.log(userData);
+    };
+
     return {
       step,
       stepper,
       btnNext,
       btnPrevious,
+      onSubmit,
     };
   },
 };
