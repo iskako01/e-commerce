@@ -1,11 +1,5 @@
 <template>
   <q-layout view="lHh lpr lFf" container style="height: 100vh">
-    <q-header class="bg-white flex flex-center absolute">
-      <div class="header">
-        <img :src="require('../assets/header/header.png')" />
-      </div>
-    </q-header>
-
     <q-page-container>
       <router-view />
     </q-page-container>

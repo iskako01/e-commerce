@@ -1,4 +1,5 @@
 <template>
+  <TheModal :isOpen="isOpen" />
   <div class="q-pa-md container">
     <q-stepper
       v-model="step"
@@ -19,10 +20,20 @@
 
       <template v-slot:navigation>
         <q-stepper-navigation>
-          <q-btn @click="btnPrevious" label="go Back" class="q-ml-sm"></q-btn>
+          <q-btn
+            flat
+            outline
+            style="color: #333333; border: 1px solid #333333"
+            icon="arrow_back"
+            @click="btnPrevious"
+            label="go Back"
+            class="q-ml-sm"
+          ></q-btn>
           <q-btn
             @click="btnNext"
-            :label="step === 2 ? 'confirm' : 'checkout'"
+            color="black"
+            :icon-right="step === 2 ? 'check' : 'arrow_forward'"
+            :label="step === 2 ? 'CONFIRM' : 'CHECKOUT'"
           ></q-btn>
         </q-stepper-navigation>
       </template>
@@ -37,9 +48,10 @@ import { useStore } from "vuex";
 
 import TheProducts from "../components/TheProducts.vue";
 import TheForm from "../components/TheForm.vue";
+import TheModal from "../components/TheModal.vue";
 export default {
   name: "ShoppingCart",
-  components: { TheProducts, TheForm },
+  components: { TheProducts, TheForm, TheModal },
 
   setup() {
     const router = useRouter();
@@ -47,13 +59,15 @@ export default {
     const step = ref(1);
     const stepper = ref();
 
+    const isOpen = ref(false);
+
     const cart = store.state.cart.cart;
 
     const btnNext = (userData) => {
       if (step.value === 1) {
         stepper.value.next();
-        console.log(step.value);
       } else {
+        isOpen.value = !isOpen.value;
         console.log(userData);
       }
     };
@@ -74,6 +88,7 @@ export default {
       btnNext,
       btnPrevious,
       onSubmit,
+      isOpen,
     };
   },
 };
@@ -84,5 +99,10 @@ export default {
   max-width: 1133px;
   padding: 13px;
   margin: 0 auto;
+}
+.q-stepper__nav {
+  padding: 0 24px 24px;
+  justify-content: space-between;
+  display: flex;
 }
 </style>

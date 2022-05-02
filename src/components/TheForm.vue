@@ -1,10 +1,10 @@
 <template>
   <div class="form">
     <div class="q-pa-md" style="max-width: 400px">
-      <q-form @click="onSubmit" class="q-gutter-md">
+      <q-form @submit="onSubmit" class="q-gutter-md">
         <label for="firstName">First Name</label>
         <q-input
-          filled
+          outlined
           id="firstName"
           v-model="firstName"
           label="Enter your first name"
@@ -14,7 +14,7 @@
 
         <label for="lastName">Last Name</label>
         <q-input
-          filled
+          outlined
           id="lastName"
           v-model="lastName"
           label="Enter your last name"
@@ -24,7 +24,7 @@
 
         <label for="email">Email</label>
         <q-input
-          filled
+          outlined
           id="email"
           v-model="email"
           label="Enter your email"
@@ -34,7 +34,21 @@
         ></q-input>
 
         <label for="date">Date</label>
-        <q-input id="date" v-model="date" filled type="date"></q-input>
+        <q-input
+          v-model="date"
+          outlined
+          mask="date"
+          label="Select"
+          :rules="['date']"
+        >
+          <template v-slot:append>
+            <q-icon name="event" class="cursor-pointer">
+              <q-popup-proxy cover :breakpoint="600">
+                <q-date v-model="date"></q-date>
+              </q-popup-proxy>
+            </q-icon>
+          </template>
+        </q-input>
       </q-form>
     </div>
   </div>
