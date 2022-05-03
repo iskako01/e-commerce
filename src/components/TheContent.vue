@@ -31,7 +31,7 @@
       </div>
     </div>
 
-    <div class="tilte__bottom">Let's play all day</div>
+    <div class="tilte-bottom">Let's play all day</div>
     <p>
       This is basically our motto and we tend to live by that.
       <span
@@ -66,7 +66,7 @@ export default {};
   color: #333333;
   padding: 11px 0 0 0;
 }
-.tilte__bottom {
+.tilte-bottom {
   font-family: "Poppins";
   font-style: normal;
   font-weight: 500;
@@ -95,6 +95,17 @@ p span {
 @media screen and (max-width: 600px) {
   .content__block {
     flex-direction: column;
+  }
+  .title {
+    font-size: 24px;
+    line-height: 36px;
+    text-align: center;
+  }
+  .tilte-bottom {
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 30px;
+    text-align: center;
   }
 }
 </style>

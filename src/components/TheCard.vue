@@ -16,15 +16,21 @@
 
     <q-card-section>
       <q-card-section class="price">
-        <div class="price">{{ card.price }} KČ</div>
+        <div class="all-price">
+          <div class="main-price">{{ card.price }} KČ</div>
+          <span
+            >Without VAT:<span class="sale"> {{ sale }}KČ</span>
+          </span>
+        </div>
+        <div class="purchase">
+          <q-btn
+            color="black"
+            class="full-width"
+            @click="addToCart"
+            label="Buy it now"
+          />
+        </div>
       </q-card-section>
-
-      <div class="purchase">
-        <span
-          >Sale:<span class="sale"> {{ sale }}KČ</span>
-        </span>
-        <q-btn color="black" @click="addToCart" label="Buy it now" />
-      </div>
     </q-card-section>
   </q-card>
 </template>
@@ -79,10 +85,10 @@ img {
   width: 100%;
   object-fit: cover;
 }
-.purchase {
-  display: flex;
+.all-price {
+  /* display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: center; */
 }
 .descriptions {
   flex: 1 1 auto;
@@ -102,6 +108,11 @@ img {
   color: #333333;
 }
 .price {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.main-price {
   font-family: "Poppins";
   font-style: normal;
   font-weight: 600;
@@ -110,5 +121,7 @@ img {
   color: #ef4444;
   padding: 0;
   margin: 0;
+}
+@media screen and (max-width: 740px) {
 }
 </style>

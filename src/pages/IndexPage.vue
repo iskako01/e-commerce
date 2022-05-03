@@ -1,13 +1,11 @@
 <template>
   <div class="wrapper">
     <div class="header">
-      <img :src="require('../assets/header/header.png')" />
-
       <div class="cart" @click="openCart">
         <q-btn
           flat
           class="icon"
-          style="color: #ff0080; font-size: 23px"
+          style="color: white; font-size: 24px"
           icon="shopping_cart"
         />
         <div class="span">{{ totalQuantity }}</div>
@@ -84,34 +82,24 @@ export default {
       return store.getters.totalQuantity(cart.value);
     });
 
-    // const addCart = () => {
-    // //   let id = currentProduct.id;
-    // //   cart.value.push(currentProduct);
-
-    //   console.log("cart", cart.value);
-    //   console.log("card", cards);
-    // };
-
     const openCart = () => {
-      //   store.dispatch("dataCart", cart.value);
-
       router.push({ name: "shopping_cart" });
     };
 
     onMounted(async () => {
-      //   await fetch("https://zadani.zkus.it/api/products", {
-      //     method: "GET",
-      //     headers: {
-      //       "X-Api-Key": "3a95z2n8",
-      //       "Content-Type": "application/json",
-      //     },
-      //   })
-      //     .then((response) => {
-      //       return response.json();
-      //     })
-      //     .then((data) => {
-      //       console.log(data);
-      //     });
+      await fetch("https://jsonplaceholder.typicode.com/users", {
+        method: "GET",
+        headers: {
+          "X-Api-Key": "3a95z2n8",
+          "Content-Type": "application/json",
+        },
+      })
+        .then((response) => {
+          return response.json();
+        })
+        .then((data) => {
+          console.log(data);
+        });
     });
 
     return { filterCards, search, openCart, totalQuantity };
@@ -125,16 +113,13 @@ export default {
   margin: 0 auto;
 }
 .header {
-  max-width: 1352px;
   width: 100%;
-  margin: 0 auto;
+  min-height: 400px;
+  background-image: url("https://www.theloadout.com/wp-content/uploads/2022/03/lego-star-wars-the-skywalker-saga-dlc-character-packs-the-mandalorian-season-1.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
 }
-.header img {
-  max-width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
 .span {
   width: 15px;
   height: 15px;
@@ -147,9 +132,9 @@ export default {
   left: 26px;
 }
 .cart {
-  position: absolute;
-  top: 12px;
-  left: 78%;
+  position: relative;
+  top: 25px;
+  left: 82%;
   width: 50px;
   height: 50px;
   padding-right: 7px;
@@ -211,6 +196,13 @@ img {
 @media screen and (max-width: 600px) {
   .search {
     width: 100%;
+  }
+  .separator__title {
+    font-weight: 500;
+    font-size: 20px;
+  }
+  .vertical__column {
+    margin-top: 34px;
   }
 }
 </style>

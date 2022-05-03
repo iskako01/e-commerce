@@ -58,11 +58,11 @@
       <div class="block-right">
         <div class="total-price">
           <div class="price-vat-title">PRICE W/O VAT:</div>
-          <div class="price-vat-number">{{ totalPriceVat }} KČ</div>
+          <div class="price-vat-title">{{ totalPriceVat }} KČ</div>
         </div>
         <div class="total-price">
           <div class="price-title">TOTAL PRICE:</div>
-          <div class="price-number">{{ totalPrice }} KČ</div>
+          <div class="price-title">{{ totalPrice }} KČ</div>
         </div>
       </div>
     </div>
@@ -169,10 +169,34 @@ export default {
   width: 50%;
   padding: 0 16px 0 0;
 }
+.price {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 27px;
+  color: #333333;
+}
 .product-price {
   display: flex;
   justify-content: space-between;
   width: 50%;
+}
+.price-vat-title {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 27px;
+  color: #9ca3af;
+}
+.price-title {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 27px;
+  color: #333333;
 }
 
 .t-price {
@@ -182,10 +206,10 @@ export default {
 .t-btn {
   margin-top: 27px;
   border: none;
-  width: 70px;
   background-color: transparent;
   color: #9ca3af;
-  border-bottom: 2px solid #3333;
+  padding: 0;
+  border-bottom: 1px solid #3333;
 }
 
 .cart-table {
@@ -224,6 +248,12 @@ img {
   justify-content: flex-start;
   flex-direction: column;
   padding: 0 0px 0 138px;
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 21px;
+  color: #9ca3af;
 }
 .product-btn {
   margin-top: 37px;
@@ -231,7 +261,8 @@ img {
   width: 70px;
   background-color: transparent;
   color: #9ca3af;
-  border-bottom: 2px solid #3333;
+  padding: 0;
+  border-bottom: 1px solid #3333;
 }
 .quantity {
   display: flex;
@@ -295,6 +326,9 @@ img {
   }
   .product-vatname {
     padding: 0;
+  }
+  .t-btn {
+    margin-top: 17px;
   }
 }
 </style>

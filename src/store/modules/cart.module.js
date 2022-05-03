@@ -45,24 +45,24 @@ export default {
         state.cart = JSON.parse(cart);
       }
     },
+    cleanCart(state) {
+      state.cart = [];
+      updateLocalStorage(state.cart);
+    },
   },
   actions: {
-    onSubmit({ state }, customerInfo) {
+    onSubmit({ state, commit }, customerInfo) {
       console.log(state.cart);
       const productInfo = state.cart.map((i) => {
         let item = { id: i.id, quantity: i.quantity };
         return item;
       });
-
-      //   console.log(dataFormcart);
-      //   console.log(customerInfo);
-
       let totalInfo = {
         product: productInfo,
         customerInfo: customerInfo,
       };
-
       console.log(totalInfo);
+      commit("cleanCart");
     },
   },
   getters: {
@@ -92,7 +92,7 @@ export default {
       return total;
     },
     totalPriceVat: (state) => (product) => {
-      const price = product.map((i) => (i.price - i.price * 0.15) * i.quantity);
+      const price = product.map((i) => (i.price - i.price * 0.1) * i.quantity);
       let total = 0;
 
       price.forEach((element) => {

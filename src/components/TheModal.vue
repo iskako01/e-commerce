@@ -1,15 +1,12 @@
 <template>
   <div class="q-pa-md q-gutter-sm">
-    <!-- <q-btn label="Close Icon" color="primary" @click="isOpen = true"></q-btn> -->
-
-    <q-dialog :model-value="isOpen">
+    <q-dialog :model-value="isOpen" @click="$router.push({ name: 'home' })">
       <q-card class="modal-card">
-        <div class="close-btn">
+        <div class="close-btn" @click="$router.push({ name: 'home' })">
           <q-btn icon="close" flat round dense v-close-popup></q-btn>
         </div>
 
         <q-card-section class="row items-center q-pb-none modal-header">
-          <!--           <q-space></q-space> -->
           <div class="modal-header">
             <q-avatar icon="check" color="green" text-color="white"></q-avatar>
             <div class="text-h6" style="padding: 16px 0 0 0">
@@ -27,7 +24,6 @@
 </template>
 
 <script>
-import { ref } from "vue";
 export default {
   name: "TheModal",
   props: {
@@ -35,9 +31,6 @@ export default {
       type: Boolean,
       required: true,
     },
-  },
-  setup() {
-    return {};
   },
 };
 </script>

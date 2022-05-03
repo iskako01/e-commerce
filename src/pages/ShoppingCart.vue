@@ -1,5 +1,5 @@
 <template>
-  <div class="wrapprer">
+  <div class="wrapper">
     <div class="cart">
       <q-btn
         flat
@@ -28,7 +28,6 @@
         </q-step>
 
         <q-step color="grey" :name="2" prefix="2" title="" :done="step > 2">
-          <!-- <TheForm /> -->
           <q-form ref="myForm" class="form">
             <label for="firstName">First Name</label>
             <q-input
@@ -93,7 +92,6 @@
               icon="arrow_back"
               @click="btnPrevious"
               label="go Back"
-              class="q-ml-sm"
             ></q-btn>
             <q-btn
               @click="btnNext"
@@ -114,8 +112,8 @@ import { useRouter } from "vue-router";
 import { useStore } from "vuex";
 
 import TheProducts from "../components/TheProducts.vue";
-import TheForm from "../components/TheForm.vue";
 import TheModal from "../components/TheModal.vue";
+
 export default {
   name: "ShoppingCart",
   components: { TheProducts, TheModal },
@@ -224,6 +222,7 @@ export default {
   position: absolute;
 }
 .wrapper {
+  width: 100%;
   max-width: 1133px;
   margin: 0 auto;
 }
@@ -248,13 +247,19 @@ export default {
   padding: 13px;
   margin: 0 auto;
 }
-.q-stepper__nav {
-  padding: 0 24px 24px;
+.q-stepper--horizontal > .q-stepper__nav {
+  padding: 12px;
   justify-content: space-between;
   display: flex;
 }
 .form {
   width: 100%;
   max-width: 360px;
+}
+@media screen and (max-width: 600px) {
+  .header-title {
+    font-size: 24px;
+    line-height: 36px;
+  }
 }
 </style>
