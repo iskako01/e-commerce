@@ -1,51 +1,54 @@
 <template>
-  <q-page class="flex flex-center">
+  <div class="wrapper">
     <div class="header">
       <img :src="require('../assets/header/header.png')" />
-    </div>
-    <div class="cart" @click="openCart">
-      <q-btn
-        flat
-        class="icon"
-        style="color: #ff0080; font-size: 23px"
-        icon="shopping_cart"
-      />
-      <div class="span">{{ totalQuantity }}</div>
-    </div>
-    <div class="container">
-      <TheContent />
 
-      <div class="separator">
-        <div class="separator__title">FEATURED COLLECTION</div>
+      <div class="cart" @click="openCart">
+        <q-btn
+          flat
+          class="icon"
+          style="color: #ff0080; font-size: 23px"
+          icon="shopping_cart"
+        />
+        <div class="span">{{ totalQuantity }}</div>
       </div>
-      <div class="search-wrapper">
-        <div class="search">
-          <q-input
-            outlined
-            v-model="search"
-            label="Search..."
-            input-class="text-left"
-          >
-            <template v-slot:prepend>
-              <q-icon v-if="search === ''" name="search"></q-icon>
-              <q-icon
-                v-else
-                name="clear"
-                class="cursor-pointer"
-                @click="search = ''"
-              ></q-icon>
-            </template>
-          </q-input>
+    </div>
+    <q-page class="flex flex-center">
+      <div class="container">
+        <TheContent />
+
+        <div class="separator">
+          <div class="separator__title">FEATURED COLLECTION</div>
+        </div>
+        <div class="search-wrapper">
+          <div class="search">
+            <q-input
+              outlined
+              v-model="search"
+              label="Search..."
+              input-class="text-left"
+            >
+              <template v-slot:prepend>
+                <q-icon v-if="search === ''" name="search"></q-icon>
+                <q-icon
+                  v-else
+                  name="clear"
+                  class="cursor-pointer"
+                  @click="search = ''"
+                ></q-icon>
+              </template>
+            </q-input>
+          </div>
+        </div>
+
+        <div class="vertical__row">
+          <div class="vertical__column">
+            <TheCard :card="card" v-for="card in filterCards" :key="card.id" />
+          </div>
         </div>
       </div>
-
-      <div class="vertical__row">
-        <div class="vertical__column">
-          <TheCard :card="card" v-for="card in filterCards" :key="card.id" />
-        </div>
-      </div>
-    </div>
-  </q-page>
+    </q-page>
+  </div>
 </template>
 
 <script>
@@ -115,18 +118,23 @@ export default {
   },
 };
 </script>
-<style>
+<style scoped>
+.wrapper {
+  max-width: 1352px;
+  width: 100%;
+  margin: 0 auto;
+}
 .header {
   max-width: 1352px;
   width: 100%;
   margin: 0 auto;
-  display: block;
 }
 .header img {
   max-width: 100%;
   height: 100%;
   object-fit: cover;
 }
+
 .span {
   width: 15px;
   height: 15px;
@@ -139,11 +147,12 @@ export default {
   left: 26px;
 }
 .cart {
-  position: relative;
-  top: 0;
-  left: 0;
+  position: absolute;
+  top: 12px;
+  left: 78%;
   width: 50px;
   height: 50px;
+  padding-right: 7px;
 }
 .icon {
   width: 50px;

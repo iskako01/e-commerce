@@ -46,7 +46,25 @@ export default {
       }
     },
   },
-  actions: {},
+  actions: {
+    onSubmit({ state }, customerInfo) {
+      console.log(state.cart);
+      const productInfo = state.cart.map((i) => {
+        let item = { id: i.id, quantity: i.quantity };
+        return item;
+      });
+
+      //   console.log(dataFormcart);
+      //   console.log(customerInfo);
+
+      let totalInfo = {
+        product: productInfo,
+        customerInfo: customerInfo,
+      };
+
+      console.log(totalInfo);
+    },
+  },
   getters: {
     productQuantity: (state) => (product) => {
       const item = state.cart.find((i) => i.id === product.id);
