@@ -210,6 +210,7 @@ export default {
   color: #9ca3af;
   padding: 0;
   border-bottom: 1px solid #3333;
+  cursor: pointer;
 }
 
 .cart-table {

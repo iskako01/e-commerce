@@ -51,17 +51,28 @@ export default {
     },
   },
   actions: {
-    onSubmit({ state, commit }, customerInfo) {
-      console.log(state.cart);
+    async onSubmit({ state, commit }, customerInfo) {
       const productInfo = state.cart.map((i) => {
         let item = { id: i.id, quantity: i.quantity };
         return item;
       });
+
       let totalInfo = {
         product: productInfo,
         customerInfo: customerInfo,
       };
+
       console.log(totalInfo);
+
+      await fetch("https://zadani.zkus.it/api/order", {
+        method: "POST",
+        headers: {
+          "X-Api-Key": "3a95z2n8",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(totalInfo),
+      });
+
       commit("cleanCart");
     },
   },

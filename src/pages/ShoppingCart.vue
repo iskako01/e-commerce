@@ -147,8 +147,9 @@ export default {
               data: date.value,
             };
 
-            store.dispatch("onSubmit", customerInfo);
-            isOpen.value = true;
+            store
+              .dispatch("onSubmit", customerInfo)
+              .then(() => (isOpen.value = true));
           } else {
             console.log("error");
           }

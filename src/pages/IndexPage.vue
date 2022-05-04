@@ -87,7 +87,7 @@ export default {
     };
 
     onMounted(async () => {
-      await fetch("https://jsonplaceholder.typicode.com/users", {
+      await fetch("https://zadani.zkus.it/api/products", {
         method: "GET",
         headers: {
           "X-Api-Key": "3a95z2n8",
