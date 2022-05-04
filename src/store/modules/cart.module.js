@@ -64,14 +64,14 @@ export default {
 
       console.log(totalInfo);
 
-      await fetch("https://zadani.zkus.it/api/order", {
-        method: "POST",
-        headers: {
-          "X-Api-Key": "3a95z2n8",
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(totalInfo),
-      });
+      //   await fetch("https://zadani.zkus.it/api/order", {
+      //     method: "POST",
+      //     headers: {
+      //       "X-Api-Key": "3a95z2n8",
+      //       "Content-Type": "application/json",
+      //     },
+      //     body: JSON.stringify(totalInfo),
+      //   });
 
       commit("cleanCart");
     },
